@@ -192,8 +192,8 @@ def plot_results(prediction, train_y, test_y, tag):
 
     #Train/test split
     axs.set_title('Dataset')
-    total_time = np.arange(stop=len(master_V)*1e-2, step=1e-2)
-    axs.plot(total_time, master_V, linewidth=0.05, color='grey')
+    total_time = np.arange(stop=len(master_q)*1e-2, step=1e-2)
+    axs.plot(total_time, master_q, linewidth=0.05, color='grey')
     axs.plot(split_tracker_train, train_y, linestyle='None', marker='.', markersize=0.8, color='r', label='Training Data')
     axs.plot(split_tracker_test, test_y, linestyle='None', marker='.', markersize=0.8, color='g', label='Test Data')
     axs.set_xlabel('Time (s)')
@@ -203,7 +203,7 @@ def plot_results(prediction, train_y, test_y, tag):
     fig2, axs2 = plt.subplots(1)
 
     #Prediction vs actual
-    axs2.plot(total_time, master_V, linewidth=0.05, color='grey')
+    axs2.plot(total_time, master_q, linewidth=0.05, color='grey')
     axs2.plot(split_tracker_test, test_y, marker='.', markersize=0.9, linestyle='None', label='Actual')
     axs2.plot(split_tracker_test, prediction, marker='.', markersize=0.9, linestyle='None', label='Model')
     at = offsetbox.AnchoredText(f"Fit: {(1-NRMSE)*100:.2f}%", loc='lower left', prop=dict(size=8),
@@ -347,7 +347,7 @@ def run_train_test(model, loss, optimizer,
 
 
 if __name__ == '__main__':
-    #Hyperparameters
+     #Hyperparameters
     look_back = 5
     learning_rate = 1e-3
     epochs = 1000 #For downsampled
@@ -355,7 +355,7 @@ if __name__ == '__main__':
     batch_size = 3000 #1s of data per batch
     weight_decay = 0 #1e-5 #If you want L2 regularization
     momentum = 0.9 #For SGD with momentum
-    hidden_size = 32
+    hidden_size = 128
     layers = 3
 
     #Load in dataset
@@ -387,7 +387,7 @@ if __name__ == '__main__':
     compare = True #Flag to compare test result
     tolerance = 0.01
     use_cached = True #Flag to use a cached model or not
-    model_name = 'Models/All_Data_LEM_32h/Model' #Model to load from cache
+    model_name = 'Models/RNNs/Single_step/Best_All_Data_128h/Model' #Model to load from cache
     track_validation = True
 
     #Create log directory
